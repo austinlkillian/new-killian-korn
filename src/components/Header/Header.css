@@ -1,5 +1,59 @@
 .header{
     width: 100%;
     height: 70px;
-    background: black;
+    background: rgb(20, 10, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
 }
+
+.menu {
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.buns-container {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 4px;
+}
+
+.buns-container>div {
+    width: 100%;
+    height: 6px;
+    border-radius: 2px;
+    background: white;
+}
+
+.logo>img {
+    width: 100px;
+    margin-top: 15px;
+}
+
+.right-buttons {
+    width: 100px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-button>img {
+    width: 38px;
+}
+
+.cart>img {
+    width: 45px;
+}
+

@@ -15,11 +15,23 @@ class Header extends Component {
     render(){
         return (
             <div className='header'>
-                <div className='menu'></div>
-                <div className='logo'></div>
+                <div className='menu'>
+                    <div className='buns-container'>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div className='logo'>
+                    <img src="https://www.killiankorn.com/themes/killian_korn/images/logo.png" alt=""/>
+                </div>
                 <div className='right-buttons'>
-                    <div className='search-button'></div>
-                    <div className='cart'></div>
+                    <div className='search-button'>
+                        <img src="http://www.clker.com/cliparts/Y/3/d/w/R/r/search-icon-white-hi.png" alt=""/>
+                    </div>
+                    <div className='cart'>
+                        <img src="http://pluspng.com/img-png/shop-png-black-and-white-logo-512.png" alt=""/>
+                    </div>
                 </div>
             </div>
         )
