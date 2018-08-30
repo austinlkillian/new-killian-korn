@@ -34,17 +34,25 @@
 }
 
 .product-scroll {
-    height: 220px;
     padding: 10px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    
 }
 
 .product-scroll>div {
-    width: 120px;
-    height: 90%;
+    width: 140px;
+    height: 86%;
     display: inline-block;
-    background: rgb(224, 224, 252);
+    background: rgba(255, 210, 164, 0.842);
     margin: 10px;
+    border-radius: 3px;
+    padding: 7px;
+}
+
+.product-scroll>div>h4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
