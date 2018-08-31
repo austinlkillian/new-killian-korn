@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-
-import {Link} from 'react-router-dom'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 import './Header.css'
 
@@ -12,12 +13,20 @@ class Header extends Component {
         this.state = {
             menuShow: false,
             searchShow: false,
-            searchInput: ''
+            searchInput: '',
+            allProducts: []
         }
         this.menuShowFn = this.menuShowFn.bind(this);
         this.searchShowFn = this.searchShowFn.bind(this);
         this.handleSearchInput = this.handleSearchInput.bind(this);
-        this.goFn = this.goFn.bind(this);
+        this.clearFn = this.clearFn.bind(this);
+        this.login = this.login.bind(this);
+    }
+
+    login(){
+        let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
+        let url=`${encodeURIComponent(window.location.origin)}/auth/callback`
+        window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
     }
 
     menuShowFn(){
@@ -38,13 +47,35 @@ class Header extends Component {
         })
     }
 
-    goFn(){
+    clearFn(){
         this.setState({
             searchInput: ''
         })
     }
 
+    componentDidMount(){
+        axios.get('/api/allproducts')
+        .then(resp => {
+            this.setState({
+                allProducts: resp.data
+            })
+        })
+    }
+
     render(){
+        const filteredProducts = this.state.allProducts.filter((product, i) => {
+            return product.product.toLowerCase().includes(this.state.searchInput.toLowerCase())
+        })
+        let displayProducts = this.state.searchInput ? filteredProducts : this.state.allProducts;
+        const mappedAllProducts = displayProducts.map((product, i) => {
+            return (
+                <div className='all-search' key={i}>
+                    <h4>{product.product}</h4>
+                    <img src={product.img} alt=""/>
+                    <h4>${product.price}</h4>
+                </div>
+            )
+        })
         return (
             <div className='whole-header'>
                 <div className='header'>
@@ -73,7 +104,7 @@ class Header extends Component {
                 </div>
                 <div className={(this.state.menuShow ? "dropDownMenuShow" : '') + ' dropDownMenu'}>
                     <div className='menu-list'>
-                        <h2>Login</h2>
+                        <h2 onClick={this.login}>Login</h2>
                         <h2>Orders</h2>
                         <h2>K-Klub</h2>
                         <h2>Gift Boxes</h2>
@@ -84,8 +115,13 @@ class Header extends Component {
                     </div>
                 </div>
                 <div className={(this.state.searchShow ? "dropDownSearchShow" : '') + ' dropDownSearch'}>
-                    <input className='search-bar' onChange={this.handleSearchInput} value={this.state.searchInput}/>
-                    <button className='go-button' onClick={this.goFn}>Go</button>
+                    <div className='search-section'>
+                        <input className='search-bar' onChange={this.handleSearchInput} value={this.state.searchInput}/>
+                        <button className='clear-button' onClick={this.clearFn}>Clear</button>
+                    </div>
+                    <div className='all-products'>
+                        {mappedAllProducts}
+                    </div>
                 </div>
             </div>
         )

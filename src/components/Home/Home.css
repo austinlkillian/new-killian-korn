@@ -22,7 +22,6 @@
     justify-content: space-evenly;
     align-items: center;
     margin: 0 auto;
-    overflow: scroll;
 }
 
 .sections {
@@ -31,6 +30,7 @@
 
 .main {
     width: 100%;
+    text-align: center;
 }
 
 .product-scroll {
@@ -38,12 +38,10 @@
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    
 }
 
 .product-scroll>div {
     width: 140px;
-    height: 86%;
     display: inline-block;
     background: rgba(255, 210, 164, 0.842);
     margin: 10px;

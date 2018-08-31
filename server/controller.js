@@ -45,5 +45,17 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! Something went wrong, could not get sugar free. We're on it!"})
             console.log(err)
         })
+    },
+
+    getAllProducts: (req, res) => {
+        const db = req.app.get('db')
+
+        db.get_all_products()
+        .then(products => {
+            res.status(200).send(products)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not get all products. We're on it!"})
+            console.log(err)
+        })
     }
 }
