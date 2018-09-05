@@ -8,7 +8,7 @@
 .header{
     width: 100%;
     height: 70px;
-    background: rgb(20, 10, 0);
+    background: rgb(216, 94, 78);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,6 +49,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.menu-list a{
+    width: 250px;
+    color: white;
+    text-decoration: none;
+    margin-left: 5px; 
+    font-size: 22px;
 }
 
 .dropDownMenu{
@@ -100,7 +108,7 @@
 .search-section{
     height: 80px;
     width: 100%;
-    background:rgb(20, 10, 0);
+    background:rgb(216, 94, 78);
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

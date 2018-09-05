@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import _ from 'lodash';
 
-import './Header.css'
+import './Header.css';
 
 class Header extends Component {
 
@@ -69,11 +68,11 @@ class Header extends Component {
         let displayProducts = this.state.searchInput ? filteredProducts : this.state.allProducts;
         const mappedAllProducts = displayProducts.map((product, i) => {
             return (
-                <div className='all-search' key={i}>
+                <Link to={`/product/${product.product_id}`}><div className='all-search' key={i} onClick={this.searchShowFn}>
                     <h4>{product.product}</h4>
                     <img src={product.img} alt=""/>
                     <h4>${product.price}</h4>
-                </div>
+                </div></Link>
             )
         })
         return (
@@ -105,13 +104,13 @@ class Header extends Component {
                 <div className={(this.state.menuShow ? "dropDownMenuShow" : '') + ' dropDownMenu'}>
                     <div className='menu-list'>
                         <h2 onClick={this.login}>Login</h2>
-                        <h2>Orders</h2>
-                        <h2>K-Klub</h2>
-                        <h2>Gift Boxes</h2>
-                        <h2>Your Business</h2>
-                        <h2>Fundraising</h2>
-                        <h2>Upcoming Shows</h2>
-                        <h2>Contact Us</h2>
+                        <Link to='/orders'><a>Orders</a></Link>
+                        <Link to='/kklub'><a>K-Klub</a></Link>
+                        <Link to='/giftboxes'><a>Gift Boxes</a></Link>
+                        <Link to='/yourbusiness'><a>Your Business</a></Link>
+                        <Link to='/fundraising'><a>Fundraising</a></Link>
+                        <Link to='./upcomingshows'><a>Upcoming Shows</a></Link>
+                        <Link to='contactus'><a>Contact Us</a></Link>
                     </div>
                 </div>
                 <div className={(this.state.searchShow ? "dropDownSearchShow" : '') + ' dropDownSearch'}>
