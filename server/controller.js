@@ -70,5 +70,18 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not get product. We're on it!"})
             console.log(err)
         })
+    },
+
+    addToCart: (req, res) => {
+        const db = req.app.get('db')
+        const {product_id, size_id, quantity} = req.body
+
+        db.insert_seed_cart([product_id, size_id, quantity])
+        .then(
+            res.sendStatus(200)
+        ).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not add to cart. We're on it!"})
+            console.log(err)
+        })
     }
 }
