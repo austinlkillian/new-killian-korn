@@ -51,12 +51,17 @@
     justify-content: space-evenly;
 }
 
-.menu-list a{
+.menu-list>a{
     width: 250px;
     color: white;
     text-decoration: none;
+    text-decoration-style: none;
     margin-left: 5px; 
-    font-size: 22px;
+    font-size: 25px;
+}
+
+a:visited {
+    text-decoration: none;
 }
 
 .dropDownMenu{

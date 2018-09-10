@@ -1,1 +1,1 @@
-insert into carts (user_id, product_id, size_id, quantity, ordered) values (3, $1, $2, $3, false);
+insert into carts (user_id, product_id, size_id, quantity, ordered) values ($1, $2, $3, $4, false);

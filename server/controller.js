@@ -75,12 +75,39 @@ module.exports = {
     addToCart: (req, res) => {
         const db = req.app.get('db')
         const {product_id, size_id, quantity} = req.body
+        const {user_id} = req.session.user
 
-        db.insert_seed_cart([product_id, size_id, quantity])
+        db.insert_seed_cart([user_id, product_id, size_id, quantity])
         .then(
             res.sendStatus(200)
         ).catch(err => {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not add to cart. We're on it!"})
+            console.log(err)
+        })
+    },
+
+    getCart: (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+
+        db.get_cart([user_id])
+        .then(items => {
+            res.status(200).send(items)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not get cart. We're on it!"})
+            console.log(err)
+        })
+    },
+
+    deleteItem: (req, res) => {
+        const db = req.app.get('db')
+        const {cartId} = req.params
+
+        db.delete_item([cartId])
+        .then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not delete item. We're on it!"})
             console.log(err)
         })
     }

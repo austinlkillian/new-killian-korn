@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+import {updateUser} from './../../ducks/users'
+
 class Product extends Component{
 
     constructor(props){
@@ -35,24 +38,33 @@ class Product extends Component{
 
     componentDidMount(){
         const{product} = this.props.match.params
-        console.log(product)
 
-        axios.get(`/api/product/${product}`)
+        this.getProduct(product)
+    }
+
+    getProduct(productId){
+        console.log(productId)
+        axios.get(`/api/product/${productId}`)
         .then(resp => {
             this.setState({
-                product: resp.data
+                product: resp.data,
+                quantity: 1
             })
         })
+    }
+
+    componentDidUpdate(previousProps){
+        if(previousProps.match.params.product !== this.props.match.params.product){
+            this.getProduct(this.props.match.params.product)
+        }
     }
 
     addToCartFn(){
         let {product_id, size_id} = this.state.product[0];
 
-        axios.post(`/api/cart`, {
-            product_id: product_id, size_id: size_id, quantity: this.state.quantity
+        axios.post(`/api/cart`, {product_id: product_id, size_id: size_id, quantity: this.state.quantity
         }).then(resp => {
             console.log(resp)
-            alert('added to cart')
         })
     }
 
@@ -83,4 +95,12 @@ class Product extends Component{
     }
 }
 
-export default Product;
+function mapStateToProps(state){
+    const {user} = state;
+
+    return{
+        user
+    }
+}
+
+export default connect(mapStateToProps, {updateUser})(Product);

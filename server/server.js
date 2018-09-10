@@ -95,5 +95,7 @@ app.get('/api/sugarfree', c.getSugarFree);
 app.get('/api/allproducts', c.getAllProducts);
 app.get('/api/product/:product', c.getProduct);
 app.post('/api/cart', c.addToCart);
+app.get('/api/cart', c.getCart)
+app.delete('/api/cart/:cartId', c.deleteItem)
 
 app.listen(SERVER_PORT, () => {console.log(`listening on port ${SERVER_PORT}`)})
