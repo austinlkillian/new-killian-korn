@@ -38,6 +38,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    text-align: center;
 }
 
 .product-scroll-div {
@@ -57,8 +58,4 @@
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.product-scroll>div>h4 {
-    color: white;
 }

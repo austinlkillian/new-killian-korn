@@ -3,6 +3,8 @@ const express = require('express'),
         session = require('express-session'),
         bodyParser = require('body-parser'),
         massive = require('massive'),
+        sc = require('./stripe_controller'),
+        faker = require('faker')
         axios = require('axios');
 
         const c = require('./controller')
@@ -16,7 +18,8 @@ const {
     SECRET,
     REACT_APP_DOMAIN,
     REACT_APP_CLIENT_ID,
-    CLIENT_SECRET
+    CLIENT_SECRET,
+    STRIPE_SECRET
 } = process.env
 
 massive(CONNECTION_STRING).then(db => {
@@ -88,12 +91,17 @@ app.get('/auth/callback', async (req, res) => {
         res.redirect('http://localhost:3000/')
     })
 
+app.post('/api/payment', sc.handlePayment);
+app.put('/api/cartUpdate', c. updateOrdered)
+
 app.get('/api/classics', c.getClassics);
 app.get('/api/flavored', c.getFlavored);
 app.get('/api/light', c.getLight);
 app.get('/api/sugarfree', c.getSugarFree);
+
 app.get('/api/allproducts', c.getAllProducts);
 app.get('/api/product/:product', c.getProduct);
+
 app.post('/api/cart', c.addToCart);
 app.get('/api/cart', c.getCart)
 app.delete('/api/cart/:cartId', c.deleteItem)

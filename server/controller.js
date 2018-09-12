@@ -137,5 +137,18 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not get cart total. We're on it!"})
             console.log(err)
         })
+    },
+
+    updateOrdered: (req, res) => {
+        const db = req.app.get ('db')
+        const {user_id} = req.session.user
+
+        db.update_ordered([user_id])
+        .then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not update ordered field. We're on it!"})
+            console.log(err)
+        })
     }
 }

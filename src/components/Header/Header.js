@@ -68,11 +68,16 @@ class Header extends Component {
         let displayProducts = this.state.searchInput ? filteredProducts : this.state.allProducts;
         const mappedAllProducts = displayProducts.map((product, i) => {
             return (
-                <Link to={`/product/${product.product_id}`}><div className='all-search' key={i} onClick={this.searchShowFn}>
-                    <h4>{product.product}</h4>
-                    <img src={product.img} alt=""/>
-                    <h4>${product.price}</h4>
-                </div></Link>
+                <Link to={`/product/${product.product_id}`}>
+                    <div className='all-search' 
+                         style={{backgroundImage: `url(${product.img})`}}
+                         key={i} 
+                         onClick={this.searchShowFn}>
+                            <div className='search-name-div'>
+                                <h4>{product.product}</h4>
+                            </div>
+                    </div>
+                </Link>
             )
         })
         return (

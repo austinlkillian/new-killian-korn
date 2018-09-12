@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios';
+import Checkout from './../Checkout/Checkout'
 
 import CartItem from './CartItem'
 
@@ -50,6 +51,8 @@ class Cart extends Component {
     }
 
     render(){
+
+
         const mappedCartItems = this.state.cartItems.map((item, i) => {
             return(
                 <div>
@@ -68,6 +71,10 @@ class Cart extends Component {
                     <h1>Cart</h1>
                     <p>Cart Total: {this.state.cartTotal}</p>
                 </div>
+                <Checkout 
+                    cartTotal={this.state.cartTotal}
+                    getItems={this.getItems}
+                    getCartTotal={this.getCartTotal}/>
                 {mappedCartItems}
             </div>
         )
