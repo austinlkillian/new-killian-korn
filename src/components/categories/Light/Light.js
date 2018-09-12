@@ -24,8 +24,8 @@ class Light extends Component {
     render(){
         const mappedLightList = this.state.lightList.map((product, i) => {
             return (
-                <Link to={`/product/${product.product_id}`}>
-                    <div key={i} 
+                <Link key={i} to={`/product/${product.product_id}`}>
+                    <div  
                          className='product-scroll-div'
                          style={{backgroundImage: `url(${product.img})`}}>
                         <div className='name-div'>

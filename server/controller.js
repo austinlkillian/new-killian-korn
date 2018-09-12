@@ -150,5 +150,18 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not update ordered field. We're on it!"})
             console.log(err)
         })
+    },
+
+    getOrdersNotShipped: (req, res) => {
+        const db = req.app.get ('db')
+        const {user_id} = req.session.user
+
+        db.get_orders_not_shipped([user_id])
+        .then(orders => {
+            res.status(200).send(orders)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not get orders. We're on it!"})
+            console.log(err)
+        })
     }
 }

@@ -23,6 +23,9 @@ const {
 } = process.env
 
 massive(CONNECTION_STRING).then(db => {
+
+    app.listen(SERVER_PORT, () => {console.log(`listening on port ${SERVER_PORT}`)})
+    
     console.log('Made Connection')
     app.set('db', db)
 }).catch(err => {console.log(err)})
@@ -108,4 +111,4 @@ app.delete('/api/cart/:cartId', c.deleteItem)
 app.put('/api/cart/:cartId', c.updateQuantity)
 app.get('/api/total', c.getCartTotal)
 
-app.listen(SERVER_PORT, () => {console.log(`listening on port ${SERVER_PORT}`)})
+app.get('/api/orders/notshipped', c.getOrdersNotShipped)

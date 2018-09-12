@@ -29,9 +29,9 @@ updateQuantity(cartId){
 }
 
     render(){
-        const {item, i} = this.props
+        const {item} = this.props
         return(
-            <div key={i}>
+            <div>
                 <div>User: {item.user_id}</div>
                 <div>Product ID: {item.product_id}</div>
                 <div>Quantity: {item.quantity}</div>

@@ -16,10 +16,12 @@ class Checkout extends Component {
         axios.post('/api/payment', {token, amount: this.props.cartTotal * 100})
         .then(resp => {
             console.log(resp)
-        }).then(
-            this.updateOrdered(),
+        }).then(() => {
+            this.updateOrdered()
             this.props.getItems()
-        )
+        }).then(() => {
+            this.props.getCartTotal()
+        })
     }
 
     render(){

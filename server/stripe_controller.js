@@ -9,7 +9,7 @@ module.exports = {
                 amount: amount,
                 currency: "usd",
                 source: id,
-                description: "Test charge from Travis"
+                description: "Test charge for Project"
             },
             (err, charge) => {
                 if(err) {

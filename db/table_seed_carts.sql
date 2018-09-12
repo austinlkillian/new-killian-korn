@@ -8,5 +8,6 @@ create table carts
     size_id int,
     foreign key(size_id) references sizes(size_id),
     quantity int,
-    ordered boolean
+    ordered boolean,
+    shipped boolean
 );

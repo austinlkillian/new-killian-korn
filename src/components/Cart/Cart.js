@@ -36,9 +36,15 @@ class Cart extends Component {
     getCartTotal(){
         axios.get('/api/total')
         .then(resp => {
-            this.setState({
-                cartTotal: resp.data[0].sum
-            })
+            if(resp.data[0].sum){
+                this.setState({
+                    cartTotal: resp.data[0].sum
+                })
+            } else if(!resp.data[0].sum){
+                this.setState({
+                    cartTotal: 0
+                })
+            }
         })
     }
 
@@ -55,10 +61,10 @@ class Cart extends Component {
 
         const mappedCartItems = this.state.cartItems.map((item, i) => {
             return(
-                <div>
+                <div key={i}>
                     <br/>
                     <hr/>
-                    <CartItem item={item} i={i} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
+                    <CartItem item={item} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
                     <button onClick={() => this.deleteItem(item.cart_id)}>delete from cart</button>
                     <br/>
                     <hr/>
@@ -69,7 +75,7 @@ class Cart extends Component {
             <div className='cart-main'>
                 <div>
                     <h1>Cart</h1>
-                    <p>Cart Total: {this.state.cartTotal}</p>
+                    <p>Cart Total: ${this.state.cartTotal}</p>
                 </div>
                 <Checkout 
                     cartTotal={this.state.cartTotal}

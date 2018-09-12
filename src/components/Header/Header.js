@@ -68,10 +68,9 @@ class Header extends Component {
         let displayProducts = this.state.searchInput ? filteredProducts : this.state.allProducts;
         const mappedAllProducts = displayProducts.map((product, i) => {
             return (
-                <Link to={`/product/${product.product_id}`}>
+                <Link key={i} to={`/product/${product.product_id}`}>
                     <div className='all-search' 
-                         style={{backgroundImage: `url(${product.img})`}}
-                         key={i} 
+                         style={{backgroundImage: `url(${product.img})`}} 
                          onClick={this.searchShowFn}>
                             <div className='search-name-div'>
                                 <h4>{product.product}</h4>
@@ -109,13 +108,13 @@ class Header extends Component {
                 <div className={(this.state.menuShow ? "dropDownMenuShow" : '') + ' dropDownMenu'}>
                     <div className='menu-list'>
                         <a onClick={this.login}>Login</a>
-                        <Link to='/orders'><a>Orders</a></Link>
-                        <Link to='/kklub'><a>K-Klub</a></Link>
-                        <Link to='/giftboxes'><a>Gift Boxes</a></Link>
-                        <Link to='/yourbusiness'><a>Your Business</a></Link>
-                        <Link to='/fundraising'><a>Fundraising</a></Link>
-                        <Link to='./upcomingshows'><a>Upcoming Shows</a></Link>
-                        <Link to='contactus'><a>Contact Us</a></Link>
+                        <Link to='/orders'><div>Orders</div></Link>
+                        <Link to='/kklub'><div>K-Klub</div></Link>
+                        <Link to='/giftboxes'><div>Gift Boxes</div></Link>
+                        <Link to='/yourbusiness'><div>Your Business</div></Link>
+                        <Link to='/fundraising'><div>Fundraising</div></Link>
+                        <Link to='./upcomingshows'><div>Upcoming Shows</div></Link>
+                        <Link to='contactus'><div>Contact Us</div></Link>
                     </div>
                 </div>
                 <div className={(this.state.searchShow ? "dropDownSearchShow" : '') + ' dropDownSearch'}>

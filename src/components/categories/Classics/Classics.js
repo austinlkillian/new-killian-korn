@@ -24,8 +24,8 @@ class Classics extends Component {
     render(){
         const mappedClassicsList = this.state.classicsList.map((product, i) => {
             return (
-                <Link to={`/product/${product.product_id}`}>
-                    <div key={i} 
+                <Link key={i} to={`/product/${product.product_id}`}>
+                    <div 
                          className='product-scroll-div'
                          style={{backgroundImage: `url(${product.img})`}}>
                         <div className='name-div'>

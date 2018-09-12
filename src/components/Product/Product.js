@@ -20,13 +20,13 @@ class Product extends Component{
 
     addQuantity(){
         this.setState({
-            quantity: this.state.quantity += 1
+            quantity: this.state.quantity + 1
         })
     }
 
     subQuantity(){
         this.setState({
-            quantity: this.state.quantity -= 1
+            quantity: this.state.quantity - 1
         })
         if(this.state.quantity<1){
             this.setState({
@@ -42,7 +42,6 @@ class Product extends Component{
     }
 
     getProduct(productId){
-        console.log(productId)
         axios.get(`/api/product/${productId}`)
         .then(resp => {
             this.setState({
