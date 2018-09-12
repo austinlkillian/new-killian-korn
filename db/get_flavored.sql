@@ -1,3 +1,3 @@
-select p.product, p.img, p.price
+select *
 from products p
 where category_id = 2;

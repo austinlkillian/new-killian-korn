@@ -13,7 +13,6 @@ class Product extends Component{
             product: [],
             quantity: 1
         }
-
         this.addQuantity = this.addQuantity.bind(this);
         this.subQuantity = this.subQuantity.bind(this);
         this.addToCartFn = this.addToCartFn.bind(this);
@@ -71,7 +70,7 @@ class Product extends Component{
     render(){
         const {quantity} = this.state
 
-        const mappedProduct = this.state.product.map((product, i) => {
+      const mappedProduct = this.state.product.map((product, i) => {
             return(
                 <div key={i}>
                     <img src={product.img} alt=""/>
@@ -96,7 +95,7 @@ class Product extends Component{
 }
 
 function mapStateToProps(state){
-    const {user} = state;
+    const {user} = state.users;
 
     return{
         user

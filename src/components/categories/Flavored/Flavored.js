@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class Flavored extends Component {
 
@@ -23,11 +24,15 @@ class Flavored extends Component {
     render(){
         const mappedFlavoredList = this.state.flavoredList.map((product, i) => {
             return (
-                <div key={i}>
-                    <h4>{product.product}</h4>
-                    <img src={product.img} alt="" />
-                    <h4>${product.price}</h4>
-                </div>
+                <Link to={`/product/${product.product_id}`}>
+                    <div key={i} 
+                         className='product-scroll-div'
+                         style={{backgroundImage: `url(${product.img})`}}>
+                        <div className='name-div'>
+                            <h4>{product.product}</h4>
+                        </div>
+                    </div>
+                </Link>
             )
         })
         return (

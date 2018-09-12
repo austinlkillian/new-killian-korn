@@ -110,5 +110,32 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not delete item. We're on it!"})
             console.log(err)
         })
+    },
+
+    updateQuantity: (req, res) => {
+        const db = req.app.get ('db')
+        const {cartId} = req.params
+        const {quantity} = req.body
+
+        db.update_quantity([cartId, quantity])
+        .then(() => {
+            res.sendStatus(200)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not update quantity. We're on it!"})
+            console.log(err)
+        })
+    },
+
+    getCartTotal: (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+
+        db.get_cart_total([user_id])
+        .then(total => {
+            res.status(200).send(total)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not get cart total. We're on it!"})
+            console.log(err)
+        })
     }
 }
