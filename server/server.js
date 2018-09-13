@@ -22,7 +22,8 @@ const {
     REACT_APP_CLIENT_ID,
     CLIENT_SECRET,
     STRIPE_SECRET,
-    HOME_PAGE
+    HOME_PAGE,
+    AUTH_URI
 } = process.env
 
 massive(CONNECTION_STRING).then(db => {
@@ -45,7 +46,7 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `http://${req.headers.host}/auth/callback`
+        redirect_uri: AUTH_URI
     }
 
     let resWithToken = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload)
