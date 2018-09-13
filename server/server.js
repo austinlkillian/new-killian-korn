@@ -4,13 +4,15 @@ const express = require('express'),
         bodyParser = require('body-parser'),
         massive = require('massive'),
         sc = require('./stripe_controller'),
-        faker = require('faker')
+        faker = require('faker'),
         axios = require('axios');
 
         const c = require('./controller')
 
 const app = express()
 app.use(bodyParser.json())
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 const {
     SERVER_PORT,
@@ -19,7 +21,8 @@ const {
     REACT_APP_DOMAIN,
     REACT_APP_CLIENT_ID,
     CLIENT_SECRET,
-    STRIPE_SECRET
+    STRIPE_SECRET,
+    HOME_PAGE
 } = process.env
 
 massive(CONNECTION_STRING).then(db => {
@@ -91,7 +94,7 @@ app.get('/auth/callback', async (req, res) => {
 
     app.get('/auth/logout', (req, res) => {
         req.session.destroy();
-        res.redirect('http://localhost:3000/')
+        res.redirect({HOME_PAGE})
     })
 
 app.post('/api/payment', sc.handlePayment);

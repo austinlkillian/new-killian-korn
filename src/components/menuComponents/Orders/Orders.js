@@ -49,8 +49,13 @@ class Orders extends Component{
         })
 
         return(
-            <div className='body'>Orders
-                {mappedOrdersNotShipped}
+            <div className='body'>
+                <h1>Orders Made</h1>
+                    {mappedOrdersNotShipped}
+                <br/>
+                <br/>
+                <br/>
+                <h1>Orders Shipped</h1>
             </div>
         )
     }
