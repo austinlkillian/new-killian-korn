@@ -71,6 +71,7 @@ a:visited {
     overflow: hidden;
     transition: 1000ms ease-in, 500ms;
     position: fixed;
+    z-index: 1
 }
 
 .dropDownMenuShow{
@@ -83,8 +84,11 @@ a:visited {
     width: 220px;
     margin-left: 10px;
 }
+.logo{
+    z-index: 999;
+}
 
-.logo>img {
+.logo>div>img {
     width: 100px;
     margin-top: 15px;
 }
@@ -97,7 +101,7 @@ a:visited {
     align-items: center;
 }
 
-.search-button>img {
+.search-button>div>img {
     width: 38px;
 }
 
@@ -165,7 +169,7 @@ a:visited {
     font-size: 21px;
 }
 
-.cart>img {
+.cart>div>img {
     width: 45px;
 }
 

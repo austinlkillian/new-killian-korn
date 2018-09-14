@@ -20,6 +20,8 @@ class Header extends Component {
         this.handleSearchInput = this.handleSearchInput.bind(this);
         this.clearFn = this.clearFn.bind(this);
         this.login = this.login.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+        this.closeSearch = this.closeSearch.bind(this);
     }
 
     login(){
@@ -34,9 +36,21 @@ class Header extends Component {
         })
     }
 
+    closeMenu(){
+            this.setState({
+                menuShow: false
+            })
+    }
+
     searchShowFn(){
         this.setState({
             searchShow: !this.state.searchShow
+        })
+    }
+    
+    closeSearch(){
+        this.setState({
+            searchShow: false
         })
     }
 
@@ -90,31 +104,37 @@ class Header extends Component {
                         </div>
                     </div>
                     <Link to='/'>
-                        <div className='logo'>
-                            <img src="https://www.killiankorn.com/themes/killian_korn/images/logo.png" alt=""/>
+                        <div className='logo' onClick={this.closeMenu}>
+                            <div onClick={this.closeSearch}>
+                                <img src="https://www.killiankorn.com/themes/killian_korn/images/logo.png" alt=""/>
+                            </div>
                         </div>
                     </Link>
                     <div className='right-buttons'>
                         <div className='search-button' onClick={this.searchShowFn}>
-                            <img src="http://www.clker.com/cliparts/Y/3/d/w/R/r/search-icon-white-hi.png" alt=""/>
+                            <div onClick={this.closeMenu}>
+                                <img src="http://www.clker.com/cliparts/Y/3/d/w/R/r/search-icon-white-hi.png" alt=""/>
+                            </div>
                         </div>
                         <Link to='/cart'>
-                            <div className='cart'>
-                                <img src="http://pluspng.com/img-png/shop-png-black-and-white-logo-512.png" alt=""/>
+                            <div className='cart' onClick={this.closeMenu}>
+                                <div onClick={this.closeSearch}>
+                                    <img src="http://pluspng.com/img-png/shop-png-black-and-white-logo-512.png" alt=""/>
+                                </div>
                             </div>
                         </Link>
                     </div>
                 </div>
                 <div className={(this.state.menuShow ? "dropDownMenuShow" : '') + ' dropDownMenu'}>
-                    <div className='menu-list'>
+                    <div className='menu-list' onClick={this.closeSearch}>
                         <a onClick={this.login}>Login</a>
-                        <Link to='/orders'><div>Orders</div></Link>
-                        <Link to='/kklub'><div>K-Klub</div></Link>
-                        <Link to='/giftboxes'><div>Gift Boxes</div></Link>
-                        <Link to='/yourbusiness'><div>Your Business</div></Link>
-                        <Link to='/fundraising'><div>Fundraising</div></Link>
-                        <Link to='./upcomingshows'><div>Upcoming Shows</div></Link>
-                        <Link to='contactus'><div>Contact Us</div></Link>
+                        <Link to='/orders'><div onClick={this.menuShowFn}>Orders</div></Link>
+                        <Link to='/kklub'><div onClick={this.menuShowFn}>K-Klub</div></Link>
+                        <Link to='/giftboxes'><div onClick={this.menuShowFn}>Gift Boxes</div></Link>
+                        <Link to='/yourbusiness'><div onClick={this.menuShowFn}>Your Business</div></Link>
+                        <Link to='/fundraising'><div onClick={this.menuShowFn}>Fundraising</div></Link>
+                        <Link to='./upcomingshows'><div onClick={this.menuShowFn}>Upcoming Shows</div></Link>
+                        <Link to='contactus'><div onClick={this.menuShowFn}>Contact Us</div></Link>
                     </div>
                 </div>
                 <div className={(this.state.searchShow ? "dropDownSearchShow" : '') + ' dropDownSearch'}>
