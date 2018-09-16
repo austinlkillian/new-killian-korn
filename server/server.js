@@ -98,8 +98,10 @@ app.get('/auth/callback', async (req, res) => {
         res.redirect({HOME_PAGE})
     })
 
+app.get('/api/cartallquantity', c.getCartAllQuantity)
+    
 app.post('/api/payment', sc.handlePayment);
-app.put('/api/cartUpdate', c. updateOrdered)
+app.put('/api/cartUpdate', c.updateOrdered)
 
 app.get('/api/classics', c.getClassics);
 app.get('/api/flavored', c.getFlavored);

@@ -12,8 +12,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-      
 }
 
 .menu {
@@ -169,7 +167,29 @@ a:visited {
     font-size: 21px;
 }
 
+.cart{
+    position: relative;
+}
+
 .cart>div>img {
     width: 45px;
+}
+
+.cartAllQuantity{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 15px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.cartAllQuantity>div{
+    margin: 0 auto;
+    font-weight: bold;
+    color: rgb(216, 94, 78);
 }
 

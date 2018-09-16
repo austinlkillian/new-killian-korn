@@ -1,0 +1,50 @@
+.product-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-main{
+    margin-top: 100px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    justify-content: space-evenly;
+    background: rgb(228, 217, 217);
+}
+
+.product-map{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+    width: 70%;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.product-map>img{
+    border-radius: 5px;
+    width: 140px;
+    height: 210px;
+}
+
+.quantity{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.quantity>button{
+    width: 30px;
+    height: 30px;
+}
+
+.addToCartButton{
+    width: 60%;
+    height: 50px;
+}

@@ -1,4 +1,17 @@
 module.exports = {
+    getCartAllQuantity: (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+
+        db.get_cart_all_quantity([user_id])
+        .then(quantity => {
+            res.status(200).send(quantity)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! Something went wrong, could not get all cart quantity. Were on it!"})
+            console.log(err)
+        })
+    },
+
     getClassics: (req, res) => {
         const db = req.app.get('db');
 

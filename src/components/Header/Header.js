@@ -13,7 +13,8 @@ class Header extends Component {
             menuShow: false,
             searchShow: false,
             searchInput: '',
-            allProducts: []
+            allProducts: [],
+            cartAllQuantity: 0
         }
         this.menuShowFn = this.menuShowFn.bind(this);
         this.searchShowFn = this.searchShowFn.bind(this);
@@ -22,6 +23,7 @@ class Header extends Component {
         this.login = this.login.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
         this.closeSearch = this.closeSearch.bind(this);
+        this.getCartAllQuantity = this.getCartAllQuantity.bind(this)
     }
 
     login(){
@@ -66,6 +68,21 @@ class Header extends Component {
         })
     }
 
+    getCartAllQuantity(){
+        axios.get('/api/cartallquantity')
+        .then(resp => {
+            if(resp.data[0].sum){
+                this.setState({
+                    cartAllQuantity: resp.data[0].sum
+                })
+            } else if(!resp.data[0].sum){
+                this.setState({
+                    cartAllQuantity: 0
+                })
+            }
+        })
+    }
+
     componentDidMount(){
         axios.get('/api/allproducts')
         .then(resp => {
@@ -73,6 +90,13 @@ class Header extends Component {
                 allProducts: resp.data
             })
         })
+        this.getCartAllQuantity()
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.state.cartAllQuantity !== prevProps.cartAllQuantity){
+            this.getCartAllQuantity()
+        }
     }
 
     render(){
@@ -120,6 +144,9 @@ class Header extends Component {
                             <div className='cart' onClick={this.closeMenu}>
                                 <div onClick={this.closeSearch}>
                                     <img src="http://pluspng.com/img-png/shop-png-black-and-white-logo-512.png" alt=""/>
+                                    <div className='cartAllQuantity'>
+                                        <div>{this.state.cartAllQuantity}</div>
+                                    </div>
                                 </div>
                             </div>
                         </Link>

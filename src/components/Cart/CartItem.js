@@ -32,14 +32,15 @@ updateQuantity(cartId){
         const {item} = this.props
         return(
             <div>
-                <div>User: {item.user_id}</div>
-                <div>Product ID: {item.product_id}</div>
-                <div>Quantity: {item.quantity}</div>
-                <input className='change-quantity'
-                onChange={this.handleQuantity}
-                placeholder='how much you want?'
-                value={this.state.quantity}
-                />
+                <img src={item.img} alt=""/>
+                <div>product: {item.product}</div>
+                <div>quantity: 
+                    <input className='change-quantity'
+                           onChange={this.handleQuantity}
+                           placeholder={item.quantity}
+                           value={this.state.quantity}/>
+                </div>
+                
                 <button onClick={() => this.updateQuantity(item.cart_id)}>Update Quantity</button>
             </div>
         )

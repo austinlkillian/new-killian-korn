@@ -27,8 +27,8 @@ class Checkout extends Component {
     render(){
         return(
             <StripeCheckout 
-                name='Austin Killian'
-                description='cart'
+                name='Killian Korn'
+                description='Checkout'
                 token={this.onToken}
                 stripeKey={process.env.REACT_APP_STRIPE_KEY}
                 amount={this.props.cartTotal * 100}
