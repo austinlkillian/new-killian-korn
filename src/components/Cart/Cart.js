@@ -61,26 +61,30 @@ class Cart extends Component {
 
         const mappedCartItems = this.state.cartItems.map((item, i) => {
             return(
-                <div key={i}>
+                <div>
                     <br/>
                     <hr/>
-                    <CartItem item={item} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
-                    <button onClick={() => this.deleteItem(item.cart_id)}>delete from cart</button>
+                    <div className='full-cart-item' key={i}>
+                        <CartItem item={item} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
+                        <button className='delete' onClick={() => this.deleteItem(item.cart_id)}>X</button>
+                    </div>
                     <br/>
                     <hr/>
-                </div>
+                </div> 
             )
         })
         return (
             <div className='cart-main'>
-                <div>
+                <div className='cart-header'>
                     <h1>Cart</h1>
-                    <p>Cart Total: ${this.state.cartTotal}</p>
+                    <div>
+                        <p>Cart Total: ${this.state.cartTotal}</p>
+                        <Checkout 
+                        cartTotal={this.state.cartTotal}
+                        getItems={this.getItems}
+                        getCartTotal={this.getCartTotal}/>
+                    </div>
                 </div>
-                <Checkout 
-                    cartTotal={this.state.cartTotal}
-                    getItems={this.getItems}
-                    getCartTotal={this.getCartTotal}/>
                 {mappedCartItems}
             </div>
         )

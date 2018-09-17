@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './CartItem.css'
 
 class CartItem extends Component{
     constructor(props){
@@ -31,17 +32,18 @@ updateQuantity(cartId){
     render(){
         const {item} = this.props
         return(
-            <div>
-                <img src={item.img} alt=""/>
-                <div>product: {item.product}</div>
-                <div>quantity: 
-                    <input className='change-quantity'
-                           onChange={this.handleQuantity}
-                           placeholder={item.quantity}
-                           value={this.state.quantity}/>
+            <div className='item-main'>
+                <div className='cart-items-left'>
+                    <img src={item.img} alt=""/>
+                    <div>{item.product}</div>
                 </div>
-                
-                <button onClick={() => this.updateQuantity(item.cart_id)}>Update Quantity</button>
+                <div className='cart-items-middle'>quantity: 
+                    <input className='change-quantity'
+                            onChange={this.handleQuantity}
+                            placeholder={item.quantity}
+                            value={this.state.quantity}/>
+                    <button onClick={() => this.updateQuantity(item.cart_id)}>Update Quantity</button>
+                </div>
             </div>
         )
     }

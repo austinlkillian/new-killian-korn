@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import './Orders.css'
+
 class Orders extends Component{
     constructor(props){
         super(props)
@@ -40,9 +42,12 @@ class Orders extends Component{
             return (
                 <div key={i}>
                     <br/>
-                    <h2>{order.cart_id}</h2>
-                    <h2>{order.product_id}</h2>
-                    <h2>{`${order.ordered}`}</h2>
+                    <div className='order-main'>
+                        <img src={order.img} alt=""/>
+                        <h2>{order.product}</h2>
+                        <h1>{order.quantity}</h1>
+                        <h2>${order.price * order.quantity}</h2>
+                    </div>
                     <hr/>
                 </div>
             )
@@ -52,10 +57,10 @@ class Orders extends Component{
             <div className='body'>
                 <h1>Orders Made</h1>
                     {mappedOrdersNotShipped}
+                {/* <br/>
                 <br/>
                 <br/>
-                <br/>
-                <h1>Orders Shipped</h1>
+                <h1>Orders Shipped</h1> */}
             </div>
         )
     }
