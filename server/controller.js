@@ -176,5 +176,18 @@ module.exports = {
             res.status(500).send({errorMessage: "Oops! something went wrong, could not get orders. We're on it!"})
             console.log(err)
         })
+    },
+
+    getProfilePic: (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.session.user
+
+        db.get_profile_pic([user_id])
+        .then(pic => {
+            res.status(200).send(pic)
+        }).catch(err => {
+            res.status(500).send({errorMessage: "Oops! something went wrong, could not get pic. We're on it!"})
+            console.log(err)
+        })
     }
 }

@@ -99,6 +99,8 @@ app.get('/auth/callback', async (req, res) => {
         res.redirect({HOME_PAGE})
     })
 
+app.get('/api/profilepic', c.getProfilePic)
+
 app.get('/api/cartallquantity', c.getCartAllQuantity)
     
 app.post('/api/payment', sc.handlePayment);

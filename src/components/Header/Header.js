@@ -14,7 +14,8 @@ class Header extends Component {
             searchShow: false,
             searchInput: '',
             allProducts: [],
-            cartAllQuantity: 0
+            cartAllQuantity: 0,
+            profilePic: ''
         }
         this.menuShowFn = this.menuShowFn.bind(this);
         this.searchShowFn = this.searchShowFn.bind(this);
@@ -24,6 +25,16 @@ class Header extends Component {
         this.closeMenu = this.closeMenu.bind(this);
         this.closeSearch = this.closeSearch.bind(this);
         this.getCartAllQuantity = this.getCartAllQuantity.bind(this)
+    }
+
+    getProfilePic(){
+        axios.get('/api/profilepic')
+        .then(resp => {
+            console.log(resp.data)
+            this.setState({
+                profilePic: resp.data[0].img
+            })
+        })
     }
 
     login(){
@@ -91,6 +102,7 @@ class Header extends Component {
             })
         })
         this.getCartAllQuantity()
+        this.getProfilePic()
     }
 
     componentDidUpdate(prevProps){
@@ -100,6 +112,7 @@ class Header extends Component {
     }
 
     render(){
+
         const filteredProducts = this.state.allProducts.filter((product, i) => {
             return product.product.toLowerCase().includes(this.state.searchInput.toLowerCase())
         })
@@ -154,7 +167,10 @@ class Header extends Component {
                 </div>
                 <div className={(this.state.menuShow ? "dropDownMenuShow" : '') + ' dropDownMenu'}>
                     <div className='menu-list' onClick={this.closeSearch}>
-                        <a onClick={this.login}>Login</a>
+                        <div className='login-div'>
+                            <a onClick={this.login}>Login</a>
+                            <div className='profile-pic'><img src={this.state.profilePic} alt="" /></div>
+                        </div>
                         <Link to='/orders'><div onClick={this.menuShowFn}>Orders</div></Link>
                         <Link to='/kklub'><div onClick={this.menuShowFn}>K-Klub</div></Link>
                         <Link to='/giftboxes'><div onClick={this.menuShowFn}>Gift Boxes</div></Link>

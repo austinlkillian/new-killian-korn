@@ -20,7 +20,7 @@ sendEmail: (req, res) => {
         from: "Killian Korn",
         to: `${email}`,
         subject: 'Order Confirmation',
-        html: `<b>${user_name}, your order has been placed and will be shipped shortly!</b>`
+        html: `<p style='color: crimson; font-size: 20px; font-weight: bold;font-style: Arial; background: white'>${user_name}, your order has been placed and will be shipped shortly!</p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
