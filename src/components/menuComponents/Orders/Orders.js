@@ -45,7 +45,10 @@ class Orders extends Component{
                     <div className='order-main'>
                         <img src={order.img} alt=""/>
                         <h2>{order.product}</h2>
-                        <h1>{order.quantity}</h1>
+                        <div>
+                            <h1>{order.quantity}</h1>
+                            <h4>Qty</h4>
+                        </div>
                         <h2>${order.price * order.quantity}</h2>
                     </div>
                     <hr/>
