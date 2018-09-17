@@ -8,6 +8,7 @@ const express = require('express'),
         axios = require('axios');
 
         const c = require('./controller')
+        const nmc = require('./nodemailer_controller')
 
 const app = express()
 app.use(bodyParser.json())
@@ -118,3 +119,5 @@ app.put('/api/cart/:cartId', c.updateQuantity)
 app.get('/api/total', c.getCartTotal)
 
 app.get('/api/orders/notshipped', c.getOrdersNotShipped)
+
+app.put('/api/nodemail', nmc.sendEmail)

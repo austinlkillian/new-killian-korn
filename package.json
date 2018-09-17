@@ -11,6 +11,7 @@
     "faker": "^4.1.0",
     "lodash": "^4.17.10",
     "massive": "^5.2.0",
+    "nodemailer": "^4.6.8",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",

@@ -11,6 +11,13 @@ class Checkout extends Component {
         })
     }
 
+    sendEmail(){
+        axios.put('/api/nodemail')
+        .then(resp => {
+            console.log(resp)
+        })
+    }
+
     onToken = (token) => {
         token.cart = void 0 
         axios.post('/api/payment', {token, amount: this.props.cartTotal * 100})
@@ -21,6 +28,7 @@ class Checkout extends Component {
             this.props.getItems()
         }).then(() => {
             this.props.getCartTotal()
+            this.sendEmail()
         })
     }
 
