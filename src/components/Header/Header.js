@@ -169,7 +169,7 @@ class Header extends Component {
                     <div className='menu-list' onClick={this.closeSearch}>
                         <div className='login-div'>
                             <a onClick={this.login}>Login</a>
-                            <div className='profile-pic'><img src={this.state.profilePic} alt="" /></div>
+                            <div className='profile-pic' style={{backgroundImage: `url(${this.state.profilePic})`}}></div>
                         </div>
                         <Link to='/orders'><div onClick={this.menuShowFn}>Orders</div></Link>
                         <Link to='/kklub'><div onClick={this.menuShowFn}>K-Klub</div></Link>
