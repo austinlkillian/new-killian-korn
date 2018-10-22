@@ -48,9 +48,6 @@ section>div{
 
 .product-scroll {
     padding: 10px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
     text-align: center;
 }
 
@@ -61,6 +58,8 @@ section>div{
     margin: 10px;
     border-radius: 3px;
     position: relative;
+    background-size: 130px;
+    background-position: center;
 }
 
 .name-div{
@@ -71,4 +70,65 @@ section>div{
     position: absolute;
     top: 0;
     left: 0;
+    white-space: pre-wrap;
+    display: flex;
+    align-items: flex-end;
+}
+
+.name-div>h4{
+    background: rgba(247, 218, 177, 0.687);
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+    color: rgb(255, 255, 255);
+}
+
+@media (max-width: 768px){
+    .product-scroll{
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 769px) {
+    .product-scroll {
+        padding: 10px;
+        overflow-x: scroll;
+        /* overflow-y: hidden; */
+        white-space: wrap;
+        text-align: center;
+    }
+    
+    .product-scroll-div {
+        width: 140px;
+        height: 220px;
+        display: inline-block;
+        margin: 10px;
+        border-radius: 3px;
+        position: relative;
+        background-size: 170px;
+        background-position: center;
+    }
+    
+    .name-div{
+        white-space: pre-wrap;
+        display: flex;
+        align-items: flex-end;
+    }
+    
+    .name-div>h4{
+        background: rgba(247, 218, 177, 0.687);
+        height: 70px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: cursive;
+        color: rgb(255, 255, 255);
+        font-size: 17px;
+    }
 }

@@ -37,5 +37,8 @@
     "/auth": {
       "target": "http://localhost:3050"
     }
+  },
+  "devDependencies": {
+    "cypress": "^3.1.0"
   }
 }

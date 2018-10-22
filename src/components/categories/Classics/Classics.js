@@ -46,4 +46,4 @@ class Classics extends Component {
     }
 }
 
-export default Classics;
+export default Classics; 
