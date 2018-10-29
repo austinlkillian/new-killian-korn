@@ -3,7 +3,8 @@ import axios from 'axios';
 import './Product.css'
 
 import {connect} from 'react-redux';
-import {updateUser} from './../../ducks/users'
+// import {updateUser} from './../../ducks/users'
+import {addToCart} from './../../ducks/cart'
 
 class Product extends Component{
 
@@ -100,11 +101,14 @@ class Product extends Component{
 }
 
 function mapStateToProps(state){
-    const {user} = state.users;
+    // const {user} = state.users;
+    const {cart, totalCost} = state.cart;
 
     return{
-        user
+        // user,
+        cart,
+        totalCost
     }
 }
 
-export default connect(mapStateToProps, {updateUser})(Product);
+export default connect(mapStateToProps, {addToCart})(Product);

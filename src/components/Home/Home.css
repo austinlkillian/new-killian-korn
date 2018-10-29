@@ -104,13 +104,13 @@ section>div{
     }
     
     .product-scroll-div {
-        width: 140px;
-        height: 220px;
+        width: 265px;
+        height: 400px;
         display: inline-block;
         margin: 10px;
         border-radius: 3px;
         position: relative;
-        background-size: 170px;
+        background-size: 270px;
         background-position: center;
     }
     
