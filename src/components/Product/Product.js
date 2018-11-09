@@ -80,7 +80,7 @@ class Product extends Component{
                     <h2>{product.product}</h2>
                     <h4>{product.description}</h4>
                     <h3>{product.size}</h3>
-                    <h4>${price}</h4>
+                    <h4>${price * quantity}</h4>
                 </div>
             )
         })
@@ -93,22 +93,11 @@ class Product extends Component{
                             <h3>Quantity: {quantity}</h3>
                         <button onClick={this.addQuantity}>+</button>
                     </div>
-                    <button className='addToCartButton' onClick={this.addToCartFn}>Add to Cart</button>
+                    <button className='addToCartButton' onClick={() => this.props.addToCart(this.state.product[0], this.state.quantity)}>Add to Cart</button>
                 </div>
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    // const {user} = state.users;
-    const {cart, totalCost} = state.cart;
-
-    return{
-        // user,
-        cart,
-        totalCost
-    }
-}
-
-export default connect(mapStateToProps, {addToCart})(Product);
+export default connect(null, {addToCart})(Product);

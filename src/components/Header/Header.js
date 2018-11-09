@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+
 import './Header.css';
 
 class Header extends Component {
@@ -158,7 +160,7 @@ class Header extends Component {
                                 <div onClick={this.closeSearch}>
                                     <img src="http://pluspng.com/img-png/shop-png-black-and-white-logo-512.png" alt=""/>
                                     <div className='cartAllQuantity'>
-                                        <div>{this.state.cartAllQuantity}</div>
+                                        <div>{this.props.cartQuantity}</div>
                                     </div>
                                 </div>
                             </div>
@@ -194,4 +196,12 @@ class Header extends Component {
     }
 }
 
-export default Header;
+function mapStateToProps( state ) {
+    const { cart } = state;
+
+    return {
+       cartQuantity: cart.cartQuantity
+    };
+};
+
+export default connect( mapStateToProps)(Header);

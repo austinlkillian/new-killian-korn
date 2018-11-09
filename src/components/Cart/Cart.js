@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import Checkout from './../Checkout/Checkout'
 
+import {connect} from 'react-redux'
+
 import CartItem from './CartItem'
 
 import './Cart.css'
@@ -58,8 +60,10 @@ class Cart extends Component {
 
     render(){
 
+        console.log(this.props.cart)
+        console.log(this.props.totalCost)
 
-        const mappedCartItems = this.state.cartItems.map((item, i) => {
+        const mappedCartItems = this.props.cart.map((item, i) => {
             return(
                 <div>
                     <br/>
@@ -78,9 +82,9 @@ class Cart extends Component {
                 <div className='cart-header'>
                     <h1>Cart</h1>
                     <div>
-                        <p>Cart Total: ${this.state.cartTotal}</p>
+                        <p>Cart Total: ${this.props.totalCost}</p>
                         <Checkout 
-                        cartTotal={this.state.cartTotal}
+                        cartTotal={this.props.totalCost}
                         getItems={this.getItems}
                         getCartTotal={this.getCartTotal}/>
                     </div>
@@ -91,4 +95,13 @@ class Cart extends Component {
     }
 }
 
-export default Cart;
+function mapStateToProps( state ) {
+    const { cart } = state;
+
+    return {
+       cart: cart.cart, 
+       totalCost: cart.totalCost
+    };
+};
+
+export default connect(mapStateToProps)(Cart);

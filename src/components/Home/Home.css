@@ -31,8 +31,12 @@ a:visited{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 0 auto;
 }
+
+h2 {
+    margin: 25px 0;
+}
+
 section>div{
     position: relative;
 }
@@ -40,6 +44,8 @@ section>div{
 .sections {
     width: 100%;
 }
+
+
 
 .main {
     width: 100%;
@@ -49,6 +55,7 @@ section>div{
 .product-scroll {
     padding: 10px;
     text-align: center;
+    scroll-behavior: smooth;
 }
 
 .product-scroll-div {
@@ -98,8 +105,8 @@ section>div{
     .product-scroll {
         padding: 10px;
         overflow-x: scroll;
-        /* overflow-y: hidden; */
-        white-space: wrap;
+        overflow-y: hidden;
+        white-space: nowrap;
         text-align: center;
     }
     
