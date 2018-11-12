@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
+import updateUser from './../../ducks/user'
 
 import './Header.css';
 
@@ -24,7 +25,7 @@ class Header extends Component {
         this.handleSearchInput = this.handleSearchInput.bind(this);
         this.clearFn = this.clearFn.bind(this);
         this.login = this.login.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this); 
         this.closeSearch = this.closeSearch.bind(this);
         this.getCartAllQuantity = this.getCartAllQuantity.bind(this)
     }
@@ -103,17 +104,27 @@ class Header extends Component {
                 allProducts: resp.data
             })
         })
-        this.getCartAllQuantity()
-        this.getProfilePic()
+
+        let userData = axios.get('/api/user-data');
+                this.props.updateUser(userData.data)
+
+        if (this.props.user) {
+            this.getProfilePic()
+            this.getCartAllQuantity()
     }
+}
 
     componentDidUpdate(prevProps){
-        if(this.state.cartAllQuantity !== prevProps.cartAllQuantity){
-            this.getCartAllQuantity()
+        if(this.props.user) {
+            if(this.state.cartAllQuantity !== prevProps.cartAllQuantity){
+                this.getCartAllQuantity()
+            }
         }
     }
 
     render(){
+
+        console.log(this.props.user)
 
         const filteredProducts = this.state.allProducts.filter((product, i) => {
             return product.product.toLowerCase().includes(this.state.searchInput.toLowerCase())
@@ -197,11 +208,12 @@ class Header extends Component {
 }
 
 function mapStateToProps( state ) {
-    const { cart } = state;
+    const { cart, user } = state;
 
     return {
-       cartQuantity: cart.cartQuantity
+       cartQuantity: cart.cartQuantity,
+       user: user.user
     };
 };
 
-export default connect( mapStateToProps)(Header);
+export default connect( mapStateToProps, {updateUser} )(Header);

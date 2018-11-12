@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateUser} from './../../ducks/users';
+import {updateUser} from '../../ducks/user';
 import {connect} from 'react-redux';
 import './Private.css';
 

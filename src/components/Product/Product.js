@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Product.css'
 
 import {connect} from 'react-redux';
-// import {updateUser} from './../../ducks/users'
+// import {updateUser} from './../../ducks/user'
 import {addToCart} from './../../ducks/cart'
 
 class Product extends Component{

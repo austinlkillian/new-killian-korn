@@ -1,9 +1,9 @@
 import {createStore, combineReducers} from 'redux';
-import userReducer from './ducks/users';
+import userReducer from './ducks/user';
 import cartReducer from './ducks/cart';
 
 let reducers = combineReducers({
-    users: userReducer,
+    user: userReducer,
     cart: cartReducer
 })
 

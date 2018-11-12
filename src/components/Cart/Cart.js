@@ -22,6 +22,7 @@ class Cart extends Component {
     }
 
     componentDidMount(){
+
         this.getItems()
         this.getCartTotal()
     }
@@ -65,10 +66,10 @@ class Cart extends Component {
 
         const mappedCartItems = this.props.cart.map((item, i) => {
             return(
-                <div>
+                <div key={i}>
                     <br/>
                     <hr/>
-                    <div className='full-cart-item' key={i}>
+                    <div className='full-cart-item'>
                         <CartItem item={item} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
                         <button className='delete' onClick={() => this.deleteItem(item.cart_id)}>X</button>
                     </div>
@@ -96,11 +97,12 @@ class Cart extends Component {
 }
 
 function mapStateToProps( state ) {
-    const { cart } = state;
+    const { cart, user } = state;
 
     return {
        cart: cart.cart, 
-       totalCost: cart.totalCost
+       totalCost: cart.totalCost,
+       user: user.user
     };
 };
 
