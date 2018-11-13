@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import updateUser from './../../ducks/user'
 
 import './Header.css';
 
@@ -105,26 +104,21 @@ class Header extends Component {
             })
         })
 
-        let userData = axios.get('/api/user-data');
-                this.props.updateUser(userData.data)
-
         if (this.props.user) {
             this.getProfilePic()
             this.getCartAllQuantity()
     }
 }
 
-    componentDidUpdate(prevProps){
-        if(this.props.user) {
-            if(this.state.cartAllQuantity !== prevProps.cartAllQuantity){
-                this.getCartAllQuantity()
-            }
-        }
-    }
+    // componentDidUpdate(prevProps){
+    //     if(this.props.user) {
+    //         if(this.state.cartAllQuantity !== prevProps.cartAllQuantity){
+    //             this.getCartAllQuantity()
+    //         }
+    //     }
+    // }
 
     render(){
-
-        console.log(this.props.user)
 
         const filteredProducts = this.state.allProducts.filter((product, i) => {
             return product.product.toLowerCase().includes(this.state.searchInput.toLowerCase())
@@ -208,12 +202,11 @@ class Header extends Component {
 }
 
 function mapStateToProps( state ) {
-    const { cart, user } = state;
+    const { cart } = state;
 
     return {
-       cartQuantity: cart.cartQuantity,
-       user: user.user
+       cartQuantity: cart.cartQuantity
     };
 };
 
-export default connect( mapStateToProps, {updateUser} )(Header);
+export default connect( mapStateToProps )(Header);

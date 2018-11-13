@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import {updateUser} from '../../ducks/user';
+import {connect} from 'react-redux';
 
 import Classics from './../categories/Classics/Classics'
 import Flavored from './../categories/Flavored/Flavored'
@@ -15,6 +18,11 @@ class Home extends Component {
             left: x,
             behavior: 'smooth'
         })
+    }
+
+    async componentDidMount() {
+        let userData = await axios.get('/api/user-data');
+        this.props.updateUser(userData.data)
     }
 
     componentWillUnmount(){
@@ -41,4 +49,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default connect( null, {updateUser} ) (Home );
