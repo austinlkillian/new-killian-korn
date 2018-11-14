@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './CartItem.css'
 
+import {connect} from 'react-redux'
+import {updateItemQuantity} from '../../ducks/cart'
+
 class CartItem extends Component{
     constructor(props){
         super(props)
@@ -40,13 +43,13 @@ updateQuantity(cartId){
                 <div className='cart-items-middle'>quantity: 
                     <input className='change-quantity'
                             onChange={this.handleQuantity}
-                            placeholder={item.quantity}
-                            value={this.state.quantity}/>
-                    <button onClick={() => this.updateQuantity(item.cart_id)}>Update Quantity</button>
+                            value={this.state.quantity}
+                            placeholder={item.quantity}/>
+                    <button onClick={() => this.props.updateItemQuantity(item, this.state.quantity)}>Update Quantity</button>
                 </div>
             </div>
         )
     }
 }
 
-export default CartItem;
+export default connect(null, {updateItemQuantity})(CartItem);
