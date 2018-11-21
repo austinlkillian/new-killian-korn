@@ -3,7 +3,7 @@ import axios from 'axios';
 import Checkout from './../Checkout/Checkout'
 
 import {connect} from 'react-redux'
-import {removeFromCart} from '../../ducks/cart'
+import {removeFromCart, addItemQuantity, subItemQuantity} from '../../ducks/cart'
 
 import CartItem from './CartItem'
 
@@ -72,6 +72,13 @@ class Cart extends Component {
                     <hr/>
                     <div className='full-cart-item'>
                         <CartItem item={item} getItems={this.getItems} getCartTotal={this.getCartTotal}/>
+                        <div className='qty'>
+                            <p>Qty: {item.quantity}</p>
+                            <div className='qty-btns'>
+                                <button onClick={() => this.props.addItemQuantity(item)}>+1</button>
+                                <button onClick={() => this.props.subItemQuantity(item)}>-1</button>
+                            </div>
+                        </div>
                         <button className='delete' onClick={() => this.props.removeFromCart(item)}>X</button>
                     </div>
                     <br/>
@@ -107,4 +114,4 @@ function mapStateToProps( state ) {
     };
 };
 
-export default connect(mapStateToProps, {removeFromCart})(Cart);
+export default connect(mapStateToProps, {removeFromCart, addItemQuantity, subItemQuantity})(Cart);

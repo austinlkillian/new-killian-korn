@@ -1,21 +1,20 @@
 const initialState = {
     cart: [],
     totalCost: 0,
-    cartQuantity: this.cart > 0 ? function() {
-        let quant = 0
-        this.cart.map(prod => quant += prod.quantity)
-        return quant
-    } : 0
+    cartQuantity: 0
 }
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
-const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
+const ADD_ITEM_QUANTITY = 'ADD_ITEM_QUANTITY'
+const SUB_ITEM_QUANTITY = 'SUB_ITEM_QUANTITY'
 
 export default function reducer(state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
+
         case ADD_TO_CART:
-            const {product, price, quantity} = action.payload
+            const { product, price, quantity } = action.payload
+
             return Object.assign({}, state, {
                 cart: [...state.cart, product],
                 totalCost: Math.round((state.totalCost + (price * quantity)) * 100) / 100,
@@ -23,53 +22,85 @@ export default function reducer(state = initialState, action) {
             })
 
         case REMOVE_FROM_CART:
-            const {item} = action.payload
+            const { remItem } = action.payload
 
             return Object.assign({}, state, {
                 cart: state.cart.filter(stateItem => {
-                    if(stateItem.product_id !== item.product_id) {
+                    if (stateItem.product_id !== remItem.product_id) {
                         return stateItem
                     }
                 }),
-                totalCost: Math.round((state.totalCost - (item.price * item.quantity)) * 100) / 100,
-                cartQuantity: state.cartQuantity - item.quantity
+                totalCost: state.cart.length > 0 ? 0 : Math.round((state.totalCost - (remItem.price * remItem.quantity)) * 100) / 100,
+                cartQuantity: state.cart.length > 0 ? 0 : state.cartQuantity - remItem.quantity
             })
 
-        case UPDATE_ITEM_QUANTITY:
-            const {i, quant} = action.payload
+        case ADD_ITEM_QUANTITY:
+            const { addItem } = action.payload
+
+            return Object.assign({}, state, {
+                cart: state.cart.map(stateItem => {
+                    if (stateItem.product_id === addItem.product_id) {
+    
+                        stateItem.quantity++
+                        return stateItem
+    
+                    } else {
+                        return stateItem
+                    }
+                }),
+                totalCost: Math.round((state.totalCost + addItem.price) * 100) / 100,
+                cartQuantity: state.cartQuantity + 1
+            })
+
+        case SUB_ITEM_QUANTITY:
+            const { subItem } = action.payload
 
             state.cart.map(stateItem => {
-                    if(stateItem.product_id === i.product_id){
-                        stateItem.quantity = quant
-                    }
-                })
+                if (stateItem.product_id === subItem.product_id) {
+
+                    return stateItem.quantity > 0 ? stateItem.quantity-- : 0
+
+                }
+            })
+
+            return Object.assign({}, state, {
+                totalCost: state.totalCost > 0 ? Math.round((state.totalCost - subItem.price) * 100) / 100 : 0,
+                cartQuantity: state.cartQuantity > 0 ? state.cartQuantity - 1 : 0
+            })
+
 
         default:
-         return state
+            return state
 
     }
 }
 
-export function addToCart(product, quantity){
+export function addToCart(product, quantity) {
     let price = product.price * 1
     product.quantity = quantity
-    return{
+    return {
         type: ADD_TO_CART,
-        payload: {product, price, quantity}
+        payload: { product, price, quantity }
     }
 }
 
-export function removeFromCart(item){
-    return{
+export function removeFromCart(remItem) {
+    return {
         type: REMOVE_FROM_CART,
-        payload: {item}
+        payload: { remItem }
     }
 }
 
-export function updateItemQuantity(i, quant){
-    quant *= 1
-    return{
-        type: UPDATE_ITEM_QUANTITY,
-        payload: {i, quant}
+export function addItemQuantity(addItem) {
+    return {
+        type: ADD_ITEM_QUANTITY,
+        payload: { addItem }
+    }
+}
+
+export function subItemQuantity(subItem) {
+    return {
+        type: SUB_ITEM_QUANTITY,
+        payload: { subItem }
     }
 }
